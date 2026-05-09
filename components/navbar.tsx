@@ -40,8 +40,8 @@ export function Navbar({ variant = "default" }: NavbarProps) {
       // Determine if scrolled past threshold
       setScrolled(currentScrollY > 50)
       
-      // Hide/show on scroll direction
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+      // Hide/show on scroll direction - hide when scrolling down after 50px
+      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
         setHidden(true)
       } else {
         setHidden(false)
@@ -63,13 +63,13 @@ export function Navbar({ variant = "default" }: NavbarProps) {
     <>
       {/* Banner + Navbar Container - Background starts here */}
       <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4",
         hidden && !mobileMenuOpen && "-translate-y-full"
       )}>
         {/* Announcement Banner */}
         <div
           className={cn(
-            "relative w-full h-10 flex items-center justify-center cursor-pointer transition-all duration-500",
+            "relative w-full h-10 flex items-center justify-center cursor-pointer transition-all duration-500 rounded-full mt-2",
             "bg-[#9EECD2]"
           )}
           onClick={handleBannerClick}
@@ -111,7 +111,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
               : "bg-transparent py-5"
           )}
         >
-          <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+          <nav className="mx-auto flex max-w-full items-center justify-between px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="group relative z-10">
             <span 
