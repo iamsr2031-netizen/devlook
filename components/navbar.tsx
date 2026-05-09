@@ -66,7 +66,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
         className={cn(
           "fixed top-2 left-4 right-4 z-[60] h-10 flex items-center justify-center cursor-pointer transition-all duration-500 rounded-full",
           "bg-[#9EECD2]",
-          hidden && !mobileMenuOpen && "-translate-y-16 opacity-0"
+          hidden && !mobileMenuOpen && "-translate-y-16"
         )}
         onClick={handleBannerClick}
         onMouseEnter={() => setIsHovering(true)}
@@ -75,26 +75,24 @@ export function Navbar({ variant = "default" }: NavbarProps) {
         <div className="flex items-center gap-2 text-sm font-medium text-black overflow-hidden">
           <span className={cn(
             "transition-transform duration-300",
-            isHovering && "animate-bounce"
+            isHovering && "scale-110"
           )}>🔥</span>
           <span className="relative h-5 overflow-hidden inline-flex items-center">
             <span 
-              className="inline-flex transition-all duration-500 ease-out"
+              className="inline-flex transition-all duration-300 ease-out"
               style={{
                 transform: isHovering ? "translateY(-100%)" : "translateY(0)",
-                opacity: isHovering ? 0 : 1
               }}
             >
-              The Category Leaderboard - Live Now
+              The Category Leaderboard
             </span>
             <span 
-              className="absolute left-0 inline-flex transition-all duration-500 ease-out"
+              className="absolute left-0 inline-flex transition-all duration-300 ease-out whitespace-nowrap"
               style={{
                 transform: isHovering ? "translateY(0)" : "translateY(100%)",
-                opacity: isHovering ? 1 : 0
               }}
             >
-              The Category Leaderboard - Live Now
+              The Category Leaderboard- Live Now
             </span>
           </span>
         </div>
@@ -102,11 +100,11 @@ export function Navbar({ variant = "default" }: NavbarProps) {
 
       <header
         className={cn(
-          "fixed top-14 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-[3.5rem] left-0 right-0 z-50 transition-all duration-500",
           scrolled || variant === "default"
             ? "glass py-3"
             : "bg-transparent py-5",
-          hidden && !mobileMenuOpen && "-translate-y-32"
+          hidden && !mobileMenuOpen && "-translate-y-[5.5rem]"
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
