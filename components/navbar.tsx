@@ -107,7 +107,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
           className={cn(
             "relative w-full transition-all duration-500",
             scrolled || variant === "default"
-              ? "glass py-3"
+              ? "bg-background/80 backdrop-blur-md py-3"
               : "bg-transparent py-5"
           )}
         >

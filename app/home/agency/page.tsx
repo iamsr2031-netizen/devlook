@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, ArrowUpRight, CheckCircle2, Mail, ChevronRight, ChevronLeft } from "lucide-react"
@@ -5,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Section, SectionHeader } from "@/components/section"
+import { useRef } from "react"
 
 const services = [
   {
@@ -56,25 +59,25 @@ const teamMembers = [
   },
 ]
 
-const featuredWork = [
-  {
-    title: "TechCorp Rebrand",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1200&h=800&fit=crop",
-  },
-  {
-    title: "E-Commerce Platform",
-    category: "Development",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-  },
-  {
-    title: "Mobile Banking App",
-    category: "UI/UX",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-  },
+const carouselImages = [
+  "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
 ]
 
 export default function AgencyHomePage() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400
+      const newScrollLeft = scrollContainerRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount)
+      scrollContainerRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -173,51 +176,94 @@ export default function AgencyHomePage() {
         </div>
       </Section>
 
-      {/* Featured Work */}
+      {/* Expertise Section */}
       <Section className="bg-muted/50">
-        <SectionHeader
-          title="Featured Work"
-          subtitle="A showcase of our recent projects and collaborations."
-        />
-        <div className="mt-12 grid lg:grid-cols-2 gap-6">
-          <Link href="/portfolio" className="group relative aspect-[4/3] lg:aspect-auto lg:row-span-2 overflow-hidden rounded-xl">
-            <Image
-              src={featuredWork[0].image}
-              alt={featuredWork[0].title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <SectionHeader 
+              title="Expertise that delivers results" 
+              subtitle="We combine creative thinking with technical excellence to solve complex business challenges and drive measurable growth."
+              align="left"
             />
-            <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/50 transition-colors" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <p className="text-sm text-background/80">{featuredWork[0].category}</p>
-              <h3 className="text-2xl font-bold text-background">{featuredWork[0].title}</h3>
+            <div className="mt-8 flex gap-4">
+              <Button asChild>
+                <Link href="/expertise">
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-            <ArrowUpRight className="absolute top-6 right-6 h-6 w-6 text-background opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
-          {featuredWork.slice(1).map((work, index) => (
-            <Link key={index} href="/portfolio" className="group relative aspect-[4/3] overflow-hidden rounded-xl">
-              <Image
-                src={work.image}
-                alt={work.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/50 transition-colors" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-sm text-background/80">{work.category}</p>
-                <h3 className="text-xl font-bold text-background">{work.title}</h3>
-              </div>
-              <ArrowUpRight className="absolute top-6 right-6 h-5 w-5 text-background opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Link>
-          ))}
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Image
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+              alt="Expertise 1"
+              width={400}
+              height={400}
+              className="rounded-lg object-cover h-48 w-full"
+            />
+            <Image
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+              alt="Expertise 2"
+              width={400}
+              height={400}
+              className="rounded-lg object-cover h-48 w-full"
+            />
+            <Image
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+              alt="Expertise 3"
+              width={400}
+              height={400}
+              className="rounded-lg object-cover h-48 w-full"
+            />
+            <Image
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+              alt="Expertise 4"
+              width={400}
+              height={400}
+              className="rounded-lg object-cover h-48 w-full"
+            />
+          </div>
         </div>
-        <div className="text-center mt-12">
-          <Button asChild variant="outline" size="lg">
-            <Link href="/portfolio">
-              View All Work
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+      </Section>
+
+      {/* Work Showcase Carousel */}
+      <Section>
+        <SectionHeader
+          title="Our Work Showcase"
+          subtitle="A collection of our latest projects and collaborations."
+        />
+        <div className="mt-12 relative group">
+          <div className="overflow-hidden rounded-xl">
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-4 pb-4 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+            >
+              {carouselImages.map((image, index) => (
+                <div key={index} className="flex-shrink-0 w-full md:w-2/3 lg:w-1/2 snap-center">
+                  <Image
+                    src={image}
+                    alt={`Project ${index + 1}`}
+                    width={800}
+                    height={600}
+                    className="rounded-lg object-cover h-96 w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       </Section>
 
@@ -264,97 +310,7 @@ export default function AgencyHomePage() {
         </div>
       </Section>
 
-      {/* Expertise Section with Image Carousel */}
-      <Section className="bg-muted/50">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <SectionHeader 
-              title="Expertise that delivers results" 
-              subtitle="We combine creative thinking with technical excellence to solve complex business challenges and drive measurable growth."
-              align="left"
-            />
-            <div className="mt-8 flex gap-4">
-              <Button asChild>
-                <Link href="/expertise">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
-                alt="Expertise 1"
-                width={400}
-                height={400}
-                className="rounded-lg object-cover h-48 w-full"
-              />
-              <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
-                alt="Expertise 2"
-                width={400}
-                height={400}
-                className="rounded-lg object-cover h-48 w-full"
-              />
-              <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
-                alt="Expertise 3"
-                width={400}
-                height={400}
-                className="rounded-lg object-cover h-48 w-full"
-              />
-              <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
-                alt="Expertise 4"
-                width={400}
-                height={400}
-                className="rounded-lg object-cover h-48 w-full"
-              />
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Image Carousel Section */}
-      <Section>
-        <SectionHeader
-          title="Our Work Showcase"
-          subtitle="A collection of our latest projects and collaborations."
-        />
-        <div className="mt-12 relative group">
-          <div className="overflow-hidden rounded-xl">
-            <div className="flex gap-4 pb-4 overflow-x-auto snap-x snap-mandatory scroll-smooth">
-              {[
-                "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-              ].map((image, index) => (
-                <div key={index} className="flex-shrink-0 w-full md:w-2/3 lg:w-1/2 snap-center">
-                  <Image
-                    src={image}
-                    alt={`Project ${index + 1}`}
-                    width={800}
-                    height={600}
-                    className="rounded-lg object-cover h-96 w-full"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-      </Section>
-
-      {/* CTA */}
+      {/* CTA with Email */}
       <Section className="bg-primary text-primary-foreground">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
