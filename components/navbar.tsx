@@ -64,9 +64,8 @@ export function Navbar({ variant = "default" }: NavbarProps) {
       {/* Announcement Banner */}
       <div
         className={cn(
-          "fixed top-2 left-4 right-4 z-[60] h-10 flex items-center justify-center cursor-pointer transition-all duration-500 rounded-full",
-          "bg-[#9EECD2]",
-          hidden && !mobileMenuOpen && "-translate-y-16"
+          "absolute top-2 left-4 right-4 z-[60] h-10 flex items-center justify-center cursor-pointer transition-all duration-500 rounded-full",
+          "bg-[#9EECD2]"
         )}
         onClick={handleBannerClick}
         onMouseEnter={() => setIsHovering(true)}
@@ -100,11 +99,11 @@ export function Navbar({ variant = "default" }: NavbarProps) {
 
       <header
         className={cn(
-          "fixed top-[3.5rem] left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled || variant === "default"
             ? "glass py-3"
             : "bg-transparent py-5",
-          hidden && !mobileMenuOpen && "-translate-y-[5.5rem]"
+          hidden && !mobileMenuOpen && "-translate-y-full"
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
