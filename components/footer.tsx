@@ -22,7 +22,7 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16 lg:py-24">
@@ -101,7 +101,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="group">
             <span 

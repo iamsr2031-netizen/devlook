@@ -1,11 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react"
+import { ArrowRight, ArrowUpRight, CheckCircle2, Mail, ChevronRight, ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Section, SectionHeader } from "@/components/section"
-import { TestimonialsSection } from "@/components/testimonials"
 
 const services = [
   {
@@ -113,7 +112,7 @@ export default function AgencyHomePage() {
       </section>
 
       {/* Clients */}
-      <section className="border-y border-border py-12 bg-muted/30">
+      <section className="py-12 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-center text-sm text-muted-foreground mb-8">Trusted by leading companies</p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
@@ -139,10 +138,16 @@ export default function AgencyHomePage() {
               subtitle="We offer end-to-end digital solutions that help businesses grow and succeed."
               align="left"
             />
-            <div className="mt-8">
+            <div className="mt-8 flex gap-4">
               <Button asChild>
+                <Link href="/story">
+                  Our Story
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
                 <Link href="/services">
-                  All Services
+                  Our Services
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -259,8 +264,95 @@ export default function AgencyHomePage() {
         </div>
       </Section>
 
-      {/* Testimonials */}
-      <TestimonialsSection />
+      {/* Expertise Section with Image Carousel */}
+      <Section className="bg-muted/50">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <SectionHeader 
+              title="Expertise that delivers results" 
+              subtitle="We combine creative thinking with technical excellence to solve complex business challenges and drive measurable growth."
+              align="left"
+            />
+            <div className="mt-8 flex gap-4">
+              <Button asChild>
+                <Link href="/expertise">
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+                alt="Expertise 1"
+                width={400}
+                height={400}
+                className="rounded-lg object-cover h-48 w-full"
+              />
+              <Image
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+                alt="Expertise 2"
+                width={400}
+                height={400}
+                className="rounded-lg object-cover h-48 w-full"
+              />
+              <Image
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+                alt="Expertise 3"
+                width={400}
+                height={400}
+                className="rounded-lg object-cover h-48 w-full"
+              />
+              <Image
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+                alt="Expertise 4"
+                width={400}
+                height={400}
+                className="rounded-lg object-cover h-48 w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Image Carousel Section */}
+      <Section>
+        <SectionHeader
+          title="Our Work Showcase"
+          subtitle="A collection of our latest projects and collaborations."
+        />
+        <div className="mt-12 relative group">
+          <div className="overflow-hidden rounded-xl">
+            <div className="flex gap-4 pb-4 overflow-x-auto snap-x snap-mandatory scroll-smooth">
+              {[
+                "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+              ].map((image, index) => (
+                <div key={index} className="flex-shrink-0 w-full md:w-2/3 lg:w-1/2 snap-center">
+                  <Image
+                    src={image}
+                    alt={`Project ${index + 1}`}
+                    width={800}
+                    height={600}
+                    className="rounded-lg object-cover h-96 w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      </Section>
 
       {/* CTA */}
       <Section className="bg-primary text-primary-foreground">
@@ -270,19 +362,40 @@ export default function AgencyHomePage() {
               className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Ready to transform your digital presence?
+              Let&apos;s create something amazing together
             </h2>
             <p className="mt-4 text-lg opacity-90">
-              Let&apos;s discuss your project and explore how we can help you achieve your goals.
+              Get in touch with us to discuss your next project.
             </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <div className="flex-1 flex items-center gap-2 bg-background/20 rounded-lg px-4 py-3">
+                <Mail className="h-5 w-5 text-primary-foreground/70 flex-shrink-0" />
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="flex-1 bg-transparent text-primary-foreground placeholder-primary-foreground/50 outline-none text-sm"
+                />
+              </div>
+              <Button size="lg" variant="secondary" className="sm:w-auto">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
           <div className="lg:text-right">
-            <Button asChild size="lg" variant="secondary">
-              <Link href="/contact">
-                Start Your Project
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Navigation</h3>
+              <nav className="space-y-2 text-primary-foreground/80">
+                <Link href="/services" className="block hover:text-primary-foreground transition-colors">Services+</Link>
+                <Link href="/industries" className="block hover:text-primary-foreground transition-colors">Industries+</Link>
+                <Link href="/international" className="block hover:text-primary-foreground transition-colors">International+</Link>
+                <Link href="/about" className="block hover:text-primary-foreground transition-colors">About+</Link>
+                <Link href="/work" className="block hover:text-primary-foreground transition-colors">Work</Link>
+                <Link href="/careers" className="block hover:text-primary-foreground transition-colors">Careers</Link>
+                <Link href="/blog" className="block hover:text-primary-foreground transition-colors">Blog & Resources+</Link>
+                <Link href="/webinar" className="block hover:text-primary-foreground transition-colors">Webinar</Link>
+              </nav>
+            </div>
           </div>
         </div>
       </Section>

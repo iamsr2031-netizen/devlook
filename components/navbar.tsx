@@ -63,7 +63,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
     <>
       {/* Banner + Navbar Container - Background starts here */}
       <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-2",
         hidden && !mobileMenuOpen && "-translate-y-full"
       )}>
         {/* Announcement Banner */}
@@ -115,7 +115,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="group relative z-10">
             <span 
-              className="text-xl font-medium tracking-tight transition-opacity duration-300 group-hover:opacity-70"
+              className="text-xl font-medium tracking-tight transition-all duration-300 group-hover:opacity-70 group-hover:scale-105 transform"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Rise at Seven<sup className="text-[10px] ml-0.5">®</sup>
