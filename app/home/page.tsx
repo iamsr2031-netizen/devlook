@@ -39,7 +39,7 @@ export default function HomeVariantsPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="relative pt-64 pb-16 md:pt-72 md:pb-20">
+      <section className="relative pt-40 pb-16 md:pt-48 md:pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">

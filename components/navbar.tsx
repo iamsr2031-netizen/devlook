@@ -61,52 +61,57 @@ export function Navbar({ variant = "default" }: NavbarProps) {
 
   return (
     <>
-      {/* Announcement Banner */}
-      <div
-        className={cn(
-          "absolute top-2 left-4 right-4 z-[60] h-10 flex items-center justify-center cursor-pointer transition-all duration-500 rounded-full",
-          "bg-[#9EECD2]"
-        )}
-        onClick={handleBannerClick}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <div className="flex items-center gap-2 text-sm font-medium text-black overflow-hidden">
-          <span className={cn(
-            "transition-transform duration-300",
-            isHovering && "scale-110"
-          )}>🔥</span>
-          <span className="relative h-5 overflow-hidden inline-flex items-center">
-            <span 
-              className="inline-flex transition-all duration-300 ease-out"
-              style={{
-                transform: isHovering ? "translateY(-100%)" : "translateY(0)",
-              }}
-            >
-              The Category Leaderboard
+      {/* Banner + Navbar Container - Background starts here */}
+      <div className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        hidden && !mobileMenuOpen && "-translate-y-full"
+      )}>
+        {/* Announcement Banner */}
+        <div
+          className={cn(
+            "relative w-full h-10 flex items-center justify-center cursor-pointer transition-all duration-500",
+            "bg-[#9EECD2]"
+          )}
+          onClick={handleBannerClick}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <div className="flex items-center gap-2 text-sm font-medium text-black overflow-hidden">
+            <span className={cn(
+              "transition-transform duration-300",
+              isHovering && "scale-110"
+            )}>🔥</span>
+            <span className="relative h-5 overflow-hidden inline-flex items-center">
+              <span 
+                className="inline-flex transition-all duration-300 ease-out"
+                style={{
+                  transform: isHovering ? "translateY(-100%)" : "translateY(0)",
+                }}
+              >
+                The Category Leaderboard
+              </span>
+              <span 
+                className="absolute left-0 inline-flex transition-all duration-300 ease-out whitespace-nowrap"
+                style={{
+                  transform: isHovering ? "translateY(0)" : "translateY(100%)",
+                }}
+              >
+                The Category Leaderboard- Live Now
+              </span>
             </span>
-            <span 
-              className="absolute left-0 inline-flex transition-all duration-300 ease-out whitespace-nowrap"
-              style={{
-                transform: isHovering ? "translateY(0)" : "translateY(100%)",
-              }}
-            >
-              The Category Leaderboard- Live Now
-            </span>
-          </span>
+          </div>
         </div>
-      </div>
 
-      <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled || variant === "default"
-            ? "glass py-3"
-            : "bg-transparent py-5",
-          hidden && !mobileMenuOpen && "-translate-y-full"
-        )}
-      >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+        {/* Navbar */}
+        <header
+          className={cn(
+            "relative w-full transition-all duration-500",
+            scrolled || variant === "default"
+              ? "glass py-3"
+              : "bg-transparent py-5"
+          )}
+        >
+          <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="group relative z-10">
             <span 
@@ -185,7 +190,8 @@ export function Navbar({ variant = "default" }: NavbarProps) {
             </button>
           </div>
         </nav>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile Navigation Overlay */}
       <div
