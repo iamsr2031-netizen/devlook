@@ -63,7 +63,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
     <>
       {/* Banner + Navbar Container - Background starts here */}
       <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-2",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-3",
         hidden && !mobileMenuOpen && "-translate-y-full"
       )}>
         {/* Announcement Banner */}

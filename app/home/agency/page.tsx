@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, ArrowUpRight, CheckCircle2, Mail, ChevronRight, ChevronLeft } from "lucide-react"
+import { ArrowRight, ArrowUpRight, CheckCircle2, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Section, SectionHeader } from "@/components/section"
-import { useRef } from "react"
+import { ImageCarousel } from "@/components/image-carousel"
 
 const services = [
   {
@@ -59,24 +59,30 @@ const teamMembers = [
   },
 ]
 
-const carouselImages = [
-  "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+const showcaseImages = [
+  {
+    src: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1200&h=700&fit=crop",
+    alt: "Project showcase 1"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=700&fit=crop",
+    alt: "Project showcase 2"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=700&fit=crop",
+    alt: "Project showcase 3"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=700&fit=crop",
+    alt: "Project showcase 4"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=700&fit=crop",
+    alt: "Project showcase 5"
+  },
 ]
 
 export default function AgencyHomePage() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 400
-      const newScrollLeft = scrollContainerRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount)
-      scrollContainerRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' })
-    }
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -114,8 +120,8 @@ export default function AgencyHomePage() {
         </div>
       </section>
 
-      {/* Clients */}
-      <section className="py-12 bg-muted/30">
+      {/* Clients - Infinite Scrolling */}
+      <section className="py-12 bg-muted/30 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-center text-sm text-muted-foreground mb-8">Trusted by leading companies</p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
@@ -227,43 +233,14 @@ export default function AgencyHomePage() {
         </div>
       </Section>
 
-      {/* Work Showcase Carousel */}
+      {/* Portfolio Showcase */}
       <Section>
         <SectionHeader
-          title="Our Work Showcase"
-          subtitle="A collection of our latest projects and collaborations."
+          title="Portfolio Showcase"
+          subtitle="Explore our latest projects and see what we can create for your brand."
         />
-        <div className="mt-12 relative group">
-          <div className="overflow-hidden rounded-xl">
-            <div 
-              ref={scrollContainerRef}
-              className="flex gap-4 pb-4 overflow-x-auto snap-x snap-mandatory scroll-smooth"
-            >
-              {carouselImages.map((image, index) => (
-                <div key={index} className="flex-shrink-0 w-full md:w-2/3 lg:w-1/2 snap-center">
-                  <Image
-                    src={image}
-                    alt={`Project ${index + 1}`}
-                    width={800}
-                    height={600}
-                    className="rounded-lg object-cover h-96 w-full"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <button 
-            onClick={() => scroll('left')}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button 
-            onClick={() => scroll('right')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
+        <div className="mt-12">
+          <ImageCarousel images={showcaseImages} autoPlay={true} interval={6000} />
         </div>
       </Section>
 
